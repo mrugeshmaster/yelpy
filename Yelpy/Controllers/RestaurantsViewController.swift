@@ -18,7 +18,49 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell") as! RestaurantCell
         
         let restaurant = restaurantsArray[indexPath.row]
-        cell.label.text = restaurant["name"] as? String ?? ""
+        
+        // Displaying Restaurant Name
+        cell.restaurantName.text = restaurant["name"] as? String ?? ""
+        
+        // Displaying Restaurant Category
+        let restaurantCategories = restaurant["categories"] as! [[String: Any]]
+        let restaurantCategory = restaurantCategories[0]
+        cell.restaurantCategoryTitle.text = restaurantCategory["title"] as? String ?? ""
+        
+        //Displaying Restaurant Rating
+        let restaurantRating = restaurant["rating"] as? Float ?? 0
+        
+        switch restaurantRating {
+        case 0:
+            cell.ratingsImage.image = UIImage(named: "regular_0.png")
+        case 1:
+            cell.ratingsImage.image = UIImage(named: "regular_1.png")
+        case 1.5:
+            cell.ratingsImage.image = UIImage(named: "regular_1_half.png")
+        case 2:
+            cell.ratingsImage.image = UIImage(named: "regular_2.png")
+        case 2.5:
+            cell.ratingsImage.image = UIImage(named: "regular_2_half.png")
+        case 3:
+            cell.ratingsImage.image = UIImage(named: "regular_3.png")
+        case 3.5:
+            cell.ratingsImage.image = UIImage(named: "regular_3_half.png")
+        case 4:
+            cell.ratingsImage.image = UIImage(named: "regular_4.png")
+        case 4.5:
+            cell.ratingsImage.image = UIImage(named: "regular_4_half.png")
+        case 5:
+            cell.ratingsImage.image = UIImage(named: "regular_5.png")
+        default:
+            cell.ratingsImage.image = UIImage(named: "regular_0.png")
+        }
+        
+        //Displaying Restaurant Contact
+        let reviewCount = restaurant["review_count"]!!
+        cell.reviewCount.text = "\(reviewCount)"
+        
+        //Displaying Restaurant Contact
+        cell.restaurantContact.text = restaurant["display_phone"] as? String ?? ""
         
         if let imageUrlString = restaurant["image_url"] as? String {
             let imageUrl = URL(string: imageUrlString)
@@ -57,7 +99,6 @@ class RestaurantsViewController: UIViewController, UITableViewDelegate, UITableV
             guard let restaurants = restaurants else {
                 return
             }
-            print(restaurants)
             self.restaurantsArray = restaurants
             self.tableView.reloadData()
         }

@@ -40,7 +40,6 @@ struct API {
         
 
                 // ––––– TODO: Get data from API and return it using completion
-                print(data)
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 
                 let restaurants = dataDictionary["businesses"] as! [[String: Any]]

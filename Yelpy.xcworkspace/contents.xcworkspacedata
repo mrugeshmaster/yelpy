@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Yelpy/yelp_stars/web_and_ios/regular">
+   </FileRef>
+   <FileRef
       location = "group:Yelpy.xcodeproj">
    </FileRef>
    <FileRef
